@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soccerwarz</title>
+<link rel="canonical" href="https://soccer-warz.com/en/">
+<meta name="robots" content="noindex,follow">
+<link rel="alternate" hreflang="en" href="https://soccer-warz.com/en/">
+<link rel="alternate" hreflang="ko" href="https://soccer-warz.com/ko/">
+<link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/">
+<link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/style.css?v=20261022">
+<script>
+(function () {
+  var l = "en";
+  try {
+    var n = String((navigator.languages && navigator.languages[0]) || navigator.language || "").toLowerCase();
+    if (n.indexOf("ko") === 0) l = "ko"; else if (n.indexOf("ja") === 0) l = "ja";
+  } catch (e) {}
+  location.replace("/" + l + "/" + location.search + location.hash);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/en/"></noscript>
+</head>
+<body>
+<div class="wrap doc">
+<h1>Soccerwarz</h1>
+<p><a href="/en/">English</a> | <a href="/ko/">한국어</a> | <a href="/ja/">日本語</a></p>
+</div>
+</body>
+</html>
