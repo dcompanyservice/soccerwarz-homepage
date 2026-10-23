@@ -45,11 +45,7 @@ main { display: block; }
 .brand:hover { text-decoration: none; }
 .brand .mark {
   width: 32px; height: 32px; border-radius: 8px; flex: 0 0 auto;
-  background:
-    radial-gradient(circle at 50% 50%, #fff 0 5px, transparent 6px),
-    linear-gradient(#fff, #fff) center / 100% 2px no-repeat,
-    #2f8f4e;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.85), inset 0 0 0 5px #2f8f4e;
+  background: url(/assets/app_icon.png) center / cover no-repeat;   /* 앱 아이콘(200.에셋원본/208.앱아이콘/app_icon_1024 — 2026-10-23) */
 }
 nav { margin-left: auto; }
 nav a { margin-left: 18px; color: var(--muted); font-weight: 500; white-space: nowrap; display: inline-block; }
