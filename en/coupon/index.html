@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redeem a coupon | Soccerwarz</title>
+  <meta name="description" content="Enter a Soccerwarz coupon code and get your reward in your in-game mailbox.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://soccer-warz.com/en/coupon/">
+  <link rel="alternate" hreflang="en" href="https://soccer-warz.com/en/coupon/">
+  <link rel="alternate" hreflang="ko" href="https://soccer-warz.com/ko/coupon/">
+  <link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/coupon/">
+  <link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/coupon/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soccerwarz">
+  <meta property="og:title" content="Redeem a coupon | Soccerwarz">
+  <meta property="og:description" content="Enter a Soccerwarz coupon code and get your reward in your in-game mailbox.">
+  <meta property="og:url" content="https://soccer-warz.com/en/coupon/">
+  <meta property="og:locale" content="en_US">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/style.css?v=20261022b">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/en/"><span class="mark" aria-hidden="true"></span>Soccerwarz</a>
+      <nav aria-label="Main">
+        <a href="/en/">Home</a>
+        <a href="/en/support/">Support</a>
+        <a href="/en/privacy/">Privacy</a>
+        <a href="/en/terms/">Terms</a>
+      </nav>
+      <div class="lang-switch" aria-label="Language"><strong>English</strong> | <a href="/ko/coupon/" hreflang="ko" lang="ko">한국어</a> | <a href="/ja/coupon/" hreflang="ja" lang="ja">日本語</a></div>
+    </div>
+  </header>
+  <main>
+  <div class="wrap doc">
+    <h1>Redeem a coupon</h1>
+    <p class="meta">Enter your game ID and a coupon code. The reward goes to your in-game mailbox.</p>
+    <form id="cp" class="info" style="max-width:520px" autocomplete="off">
+      <p><label for="gid"><strong>Game ID (8-digit friend code)</strong></label><br>
+        <input id="gid" name="gid" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required style="font-size:20px;padding:10px 12px;width:100%;box-sizing:border-box;letter-spacing:2px"></p>
+      <p class="meta" style="margin-top:-6px">Opening this page from Settings > Coupon fills it in for you. You can also find it in the Friends window.</p>
+      <p><label for="code"><strong>Coupon code</strong></label><br>
+        <input id="code" name="code" maxlength="40" required style="font-size:20px;padding:10px 12px;width:100%;box-sizing:border-box;text-transform:uppercase;letter-spacing:1px"></p>
+      <p><button id="go" type="submit" style="font-size:18px;padding:12px 28px;border-radius:10px;border:0;background:#2e9a52;color:#fff;font-weight:700;cursor:pointer">Redeem</button></p>
+      <p id="msg" role="status" style="font-weight:700;min-height:1.4em"></p>
+    </form>
+    <ul><li>Each coupon can be used once per account.</li><li>Rewards are sent to your mailbox. Open the mailbox in the game to collect them.</li><li>Each coupon has its own redemption period and quantity.</li></ul>
+  </div>
+  <script>
+  (function () {
+    var M = {"ok": "Coupon redeemed. Check the mailbox of {nick}.", "err": {"bad_id": "The game ID is 8 digits.", "bad_code": "Please check the coupon code.", "no_user": "We couldn't find that game ID.", "no_coupon": "This coupon doesn't exist or has ended.", "not_started": "This coupon can't be used yet.", "expired": "This coupon has expired.", "sold_out": "All coupons of this kind have been used.", "used": "You've already used this coupon.", "too_many": "Too many attempts. Please try again later.", "net": "Couldn't reach the server. Please try again later."}, "items": {"coins": "Coins", "gems": "Gems", "tickets": "Tickets", "shards": "Shards"}};
+    var q = new URLSearchParams(location.search), id = (q.get("id") || "").replace(/\D/g, "").slice(0, 8);
+    var gid = document.getElementById("gid"), code = document.getElementById("code"), msg = document.getElementById("msg"), go = document.getElementById("go");
+    if (id) gid.value = id;
+    if (q.get("code")) code.value = q.get("code");
+    document.getElementById("cp").addEventListener("submit", function (e) {
+      e.preventDefault();
+      msg.style.color = "";
+      go.disabled = true;
+      fetch("https://api.soccer-warz.com/coupon/redeem", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ game_id: gid.value.trim(), code: code.value.trim() }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (x) {
+          if (x.ok && x.j.ok) {
+            var its = (x.j.items || []).map(function (it) { return (M.items[it.type] || it.type) + " " + Number(it.amount).toLocaleString(); }).join(" · ");
+            msg.style.color = "#2e9a52";
+            msg.textContent = M.ok.replace("{nick}", x.j.nickname || "") + (its ? " (" + its + ")" : "");
+            code.value = "";
+          } else {
+            msg.style.color = "#d0433b";
+            msg.textContent = M.err[x.j.error] || M.err.net;
+          }
+        })
+        .catch(function () { msg.style.color = "#d0433b"; msg.textContent = M.err.net; })
+        .then(function () { go.disabled = false; });
+    });
+  })();
+  </script>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div>&copy; 2026 dcompanyservice. All rights reserved.<span class="biz">Dcompany &middot; Representative Donggwan Lee &middot; Business registration no. 119-20-24793 &middot; Mail-order business report no. 2026-Gyeonggi Siheung-1933</span></div>
+      <div><a href="/en/support/">Support</a><a href="/en/terms/">Terms of Service</a><a href="/en/privacy/">Privacy Policy</a><a href="/en/delete-account/">Delete account</a><a href="mailto:contact@soccer-warz.com">contact@soccer-warz.com</a></div>
+    </div>
+  </footer>
+  <script src="/assets/track.js?v=20261022" defer></script>
+</body>
+</html>

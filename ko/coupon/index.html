@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿠폰 사용 | Soccerwarz</title>
+  <meta name="description" content="Soccerwarz 쿠폰 코드를 입력하고 보상을 우편으로 받으세요.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://soccer-warz.com/ko/coupon/">
+  <link rel="alternate" hreflang="en" href="https://soccer-warz.com/en/coupon/">
+  <link rel="alternate" hreflang="ko" href="https://soccer-warz.com/ko/coupon/">
+  <link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/coupon/">
+  <link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/coupon/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soccerwarz">
+  <meta property="og:title" content="쿠폰 사용 | Soccerwarz">
+  <meta property="og:description" content="Soccerwarz 쿠폰 코드를 입력하고 보상을 우편으로 받으세요.">
+  <meta property="og:url" content="https://soccer-warz.com/ko/coupon/">
+  <meta property="og:locale" content="ko_KR">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/style.css?v=20261022b">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/ko/"><span class="mark" aria-hidden="true"></span>Soccerwarz</a>
+      <nav aria-label="주 메뉴">
+        <a href="/ko/">홈</a>
+        <a href="/ko/support/">고객 지원</a>
+        <a href="/ko/privacy/">개인정보</a>
+        <a href="/ko/terms/">이용약관</a>
+      </nav>
+      <div class="lang-switch" aria-label="Language"><a href="/en/coupon/" hreflang="en" lang="en">English</a> | <strong>한국어</strong> | <a href="/ja/coupon/" hreflang="ja" lang="ja">日本語</a></div>
+    </div>
+  </header>
+  <main>
+  <div class="wrap doc">
+    <h1>쿠폰 사용</h1>
+    <p class="meta">게임 ID와 쿠폰 코드를 입력하면 보상이 게임 우편함으로 가요.</p>
+    <form id="cp" class="info" style="max-width:520px" autocomplete="off">
+      <p><label for="gid"><strong>게임 ID (친구 코드 8자리)</strong></label><br>
+        <input id="gid" name="gid" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required style="font-size:20px;padding:10px 12px;width:100%;box-sizing:border-box;letter-spacing:2px"></p>
+      <p class="meta" style="margin-top:-6px">게임 설정 > 쿠폰 으로 열면 자동으로 채워져요. 친구 창에서도 볼 수 있어요.</p>
+      <p><label for="code"><strong>쿠폰 코드</strong></label><br>
+        <input id="code" name="code" maxlength="40" required style="font-size:20px;padding:10px 12px;width:100%;box-sizing:border-box;text-transform:uppercase;letter-spacing:1px"></p>
+      <p><button id="go" type="submit" style="font-size:18px;padding:12px 28px;border-radius:10px;border:0;background:#2e9a52;color:#fff;font-weight:700;cursor:pointer">쿠폰 사용</button></p>
+      <p id="msg" role="status" style="font-weight:700;min-height:1.4em"></p>
+    </form>
+    <ul><li>쿠폰은 계정마다 한 번만 쓸 수 있어요.</li><li>보상은 우편함으로 가요. 게임에서 우편함을 열어 받아 주세요.</li><li>쿠폰마다 쓸 수 있는 기간과 수량이 정해져 있어요.</li></ul>
+  </div>
+  <script>
+  (function () {
+    var M = {"ok": "쿠폰을 사용했어요. {nick} 님의 우편함을 확인해 주세요.", "err": {"bad_id": "게임 ID는 숫자 8자리예요.", "bad_code": "쿠폰 코드를 확인해 주세요.", "no_user": "게임 ID를 찾을 수 없어요.", "no_coupon": "없는 쿠폰이거나 사용이 끝난 쿠폰이에요.", "not_started": "아직 사용 기간이 아니에요.", "expired": "사용 기간이 끝난 쿠폰이에요.", "sold_out": "준비된 수량이 모두 사용됐어요.", "used": "이미 사용한 쿠폰이에요.", "too_many": "시도가 너무 많아요. 잠시 뒤 다시 해 주세요.", "net": "서버에 연결하지 못했어요. 잠시 뒤 다시 해 주세요."}, "items": {"coins": "코인", "gems": "다이아", "tickets": "입장권", "shards": "조각"}};
+    var q = new URLSearchParams(location.search), id = (q.get("id") || "").replace(/\D/g, "").slice(0, 8);
+    var gid = document.getElementById("gid"), code = document.getElementById("code"), msg = document.getElementById("msg"), go = document.getElementById("go");
+    if (id) gid.value = id;
+    if (q.get("code")) code.value = q.get("code");
+    document.getElementById("cp").addEventListener("submit", function (e) {
+      e.preventDefault();
+      msg.style.color = "";
+      go.disabled = true;
+      fetch("https://api.soccer-warz.com/coupon/redeem", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ game_id: gid.value.trim(), code: code.value.trim() }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (x) {
+          if (x.ok && x.j.ok) {
+            var its = (x.j.items || []).map(function (it) { return (M.items[it.type] || it.type) + " " + Number(it.amount).toLocaleString(); }).join(" · ");
+            msg.style.color = "#2e9a52";
+            msg.textContent = M.ok.replace("{nick}", x.j.nickname || "") + (its ? " (" + its + ")" : "");
+            code.value = "";
+          } else {
+            msg.style.color = "#d0433b";
+            msg.textContent = M.err[x.j.error] || M.err.net;
+          }
+        })
+        .catch(function () { msg.style.color = "#d0433b"; msg.textContent = M.err.net; })
+        .then(function () { go.disabled = false; });
+    });
+  })();
+  </script>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div>&copy; 2026 dcompanyservice. All rights reserved.<span class="biz">디컴퍼니 &middot; 대표 이동관 &middot; 사업자등록번호 119-20-24793 &middot; 통신판매업 신고번호 2026-경기시흥-1933</span></div>
+      <div><a href="/ko/support/">고객 지원</a><a href="/ko/terms/">이용약관</a><a href="/ko/privacy/">개인정보 처리방침</a><a href="/ko/delete-account/">계정 삭제</a><a href="mailto:contact@soccer-warz.com">contact@soccer-warz.com</a></div>
+    </div>
+  </footer>
+  <script src="/assets/track.js?v=20261022" defer></script>
+</body>
+</html>
