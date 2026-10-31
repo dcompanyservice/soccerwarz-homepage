@@ -135,6 +135,10 @@ h2 { font-size: 30px; margin: 0 0 10px; letter-spacing: .01em; }
 .info { background: var(--panel); border: 1px solid var(--panel-edge); box-shadow: 0 0 0 1px var(--line); border-radius: 14px; padding: 18px 24px; margin: 16px 0; }
 .info p { margin: 8px 0; color: var(--muted); }
 .info strong { color: var(--ink); }
+/* 문서 페이지(처리방침·약관 등)의 정보 묶음은 상자 없이 본문과 같은 글자로(사용자 2026-10-31 "박스로 티 나게 하지 말고 위랑 똑같은 스타일로") */
+.doc .info { background: none; border: 0; box-shadow: none; border-radius: 0; padding: 0; margin: 0; }
+.doc .info p { color: #cfdad4; margin: 1em 0; }
+.doc .info strong { color: #cfdad4; }
 
 /* documents (privacy, terms, support) */
 .doc { max-width: 780px; padding-bottom: 56px; }
@@ -166,3 +170,31 @@ h2 { font-size: 30px; margin: 0 0 10px; letter-spacing: .01em; }
   body { background-attachment: scroll; }
   .doc table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
+
+/* 941 첫 화면 · 스크린샷 (2026-10-31) */
+.hero-art {
+  background:
+    linear-gradient(90deg, rgba(8,14,12,.94) 0%, rgba(8,14,12,.78) 42%, rgba(8,14,12,.35) 75%, rgba(8,14,12,.55) 100%),
+    url("/images/hero.webp?v=20261031") center / cover no-repeat, #10241a;
+}
+.hero-art .wrap { padding-top: 72px; padding-bottom: 72px; }
+.hero-art h1 { font-size: 56px; text-shadow: 0 3px 0 rgba(0,0,0,.45); }
+.hero .release { display: inline-block; margin: 0 0 14px; padding: 6px 14px; border-radius: 999px; background: #f2b84b; color: #1b1405; font-weight: 800; font-size: 15px; }
+.hero .phone { flex: 0 1 270px; margin: 0 auto; border-radius: 34px; padding: 10px; background: #0a0f0d; border: 1px solid var(--line-2); box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 6px rgba(255,255,255,.04); }
+.hero .phone img { width: 100%; height: auto; border-radius: 26px; }
+.store-btn { min-width: 172px; text-align: left; }
+.store-btn b { display: block; font-size: 17px; }
+.store-btn small { color: #f2d58b; }
+.shot-strip { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 18px; -webkit-overflow-scrolling: touch; }
+.shot { flex: 0 0 230px; margin: 0; scroll-snap-align: start; }
+.shot img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--line-2); box-shadow: 0 10px 28px rgba(0,0,0,.45); }
+.shot figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
+@media (max-width: 640px) {
+  .hero-art { background:
+    linear-gradient(180deg, rgba(8,14,12,.55) 0%, rgba(8,14,12,.92) 45%),
+    url("/images/hero.webp?v=20261031") top center / 220% auto no-repeat, #10241a; }
+  .hero-art h1 { font-size: 40px; }
+  .hero .phone { flex-basis: 220px; max-width: 220px; }
+  .shot { flex-basis: 200px; }
+}
+/* 941 끝 */
