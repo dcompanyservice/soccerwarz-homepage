@@ -1,0 +1,36 @@
+SOCCERWARZ - PRESS KIT FACT SHEET
+
+Title:        Soccerwarz
+Developer:    dcompany (game studio, Republic of Korea)
+Release date: November 18, 2026
+Platforms:    Android (Google Play), iOS (App Store)
+Price:        Free to play (optional in-app purchases)
+Genre:        7v7 soccer strategy
+Languages:    English, Korean, Japanese, Traditional Chinese, Simplified Chinese,
+              German, French, Italian, Spanish, Portuguese, Russian (11)
+Website:      https://soccer-warz.com
+Press kit:    https://soccer-warz.com/en/press/
+Contact:      contact@soccer-warz.com
+Trailer:      https://www.youtube.com/watch?v=YyLfGLODcu8
+
+TAGLINE
+Place your players strategically and battle!
+
+SHORT DESCRIPTION
+Soccerwarz is a 7v7 soccer strategy game. Predict your opponent's strategy,
+place seven fantasy players on a 5 x 9 pitch, and watch the match play out:
+passes, steals and one-on-one battles are decided by each player's stats.
+Reposition mid-match to turn the game around, and settle draws in a penalty
+shootout.
+
+KEY FEATURES
+- Strategy first: read your opponent and find the best formation for every round.
+- Fantasy squad: knights, goblins, sharks, minotaurs and more, each with its own stats and traits.
+- Comebacks and shootouts: reposition mid-match to turn things around. Draws go to a penalty shootout.
+- Ranked seasons and Club Wars: climb the season ranking and fight Club Wars together with your club.
+
+ASSETS IN THIS KIT
+screenshots/  portrait 1080x1920 (6), landscape 1920x1080 (4)
+logo/         logo (transparent PNG), app icon 1024/512, key art 1024x500
+
+Store links will be added on release day.
