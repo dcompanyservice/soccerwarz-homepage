@@ -175,7 +175,7 @@ h2 { font-size: 30px; margin: 0 0 10px; letter-spacing: .01em; }
 .hero-art {
   background:
     linear-gradient(90deg, rgba(8,14,12,.94) 0%, rgba(8,14,12,.78) 42%, rgba(8,14,12,.35) 75%, rgba(8,14,12,.55) 100%),
-    url("/images/hero.webp?v=20261031") center / cover no-repeat, #10241a;
+    url("/images/hero.webp?v=20261102") center / cover no-repeat, #10241a;
 }
 .hero-art .wrap { padding-top: 72px; padding-bottom: 72px; }
 .hero-art h1 { font-size: 56px; text-shadow: 0 3px 0 rgba(0,0,0,.45); }
@@ -192,7 +192,7 @@ h2 { font-size: 30px; margin: 0 0 10px; letter-spacing: .01em; }
 @media (max-width: 640px) {
   .hero-art { background:
     linear-gradient(180deg, rgba(8,14,12,.55) 0%, rgba(8,14,12,.92) 45%),
-    url("/images/hero.webp?v=20261031") top center / 220% auto no-repeat, #10241a; }
+    url("/images/hero.webp?v=20261102") top center / 220% auto no-repeat, #10241a; }
   .hero-art h1 { font-size: 40px; }
   .hero .phone { flex-basis: 220px; max-width: 220px; }
   .shot { flex-basis: 200px; }
