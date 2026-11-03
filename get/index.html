@@ -79,7 +79,10 @@
     }
     $("date").textContent = T.now;
     if (isIOS) { btn(IOS_URL, T.ios, true); $("note").textContent = T.going; location.replace(IOS_URL); return; }
-    if (isAndroid) { btn(PLAY_URL, T.play, true); $("note").textContent = T.going; location.replace(PLAY_URL); return; }
+    // 안드로이드: Play 스토어 앱을 바로 엶(intent — 크롬 안 웹 페이지로 열리던 것, A24 2026-11-03), 스토어 앱이 없으면 웹 주소로
+    var PLAY_INTENT = "intent://details?id=" + PKG + "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=get") +
+      "#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=" + encodeURIComponent(PLAY_URL) + ";end";
+    if (isAndroid) { btn(PLAY_INTENT, T.play, true); $("note").textContent = T.going; location.replace(PLAY_INTENT); return; }
     btn(IOS_URL, T.ios, true);
     btn(PLAY_URL, T.play, true);
     btn("/" + lang + "/", T.site);
