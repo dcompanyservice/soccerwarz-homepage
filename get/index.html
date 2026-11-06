@@ -51,7 +51,8 @@
     var src = (q.get("src") || "").toLowerCase().replace(/[^a-z0-9_\-]/g, "").slice(0, 40) || "direct";
     var forced = q.get("live");
     var live = forced === "1" ? true : forced === "0" ? false : Date.now() >= LAUNCH_MS;
-    var nl = (navigator.language || "en").toLowerCase();
+    var ql = (q.get("lang") || "").toLowerCase();   // 화면 언어 미리보기(?lang=ko|ja|en — 2026-11-07 x 세션 요청, 있으면 기기 언어보다 우선)
+    var nl = (["ko", "ja", "en"].indexOf(ql) >= 0 ? ql : (navigator.language || "en")).toLowerCase();
     var lang = nl.indexOf("ko") === 0 ? "ko" : nl.indexOf("ja") === 0 ? "ja" : "en";
     document.documentElement.lang = lang;
     var T = {
