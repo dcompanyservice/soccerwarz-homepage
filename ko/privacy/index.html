@@ -76,6 +76,7 @@
     <h2>3. 광고</h2>
     <p>Soccerwarz 는 Android 와 iOS 에서 Google AdMob 을 통한 선택형 보상 광고를 제공합니다(상점의 일일 광고 보상, 경기 결과 화면에서 광고를 보고 경험치를 2배로 받기). 광고는 이용자가 버튼을 누를 때만 재생되며, 광고를 보지 않아도 게임을 할 수 있습니다. 광고 시청이 끝나면 AdMob 이 서버 측 확인으로 운영자 서버에 시청 완료를 알리고, 운영자는 이를 계정 식별자와 연결해 보상을 지급합니다.</p>
     <p>Google AdMob 은 <a href="https://policies.google.com/privacy?hl=ko" target="_blank" rel="noopener">Google 개인정보처리방침</a>에 따라 기기 광고 식별자(iOS 의 IDFA, Android 의 광고 ID), IP 주소로 추정한 대략적인 위치, 광고 상호작용, 기기 정보, 진단 정보를 수집·처리할 수 있습니다. 유럽경제지역·영국·스위스에서는 Google 의 동의 관리 도구(UMP)로 맞춤형 광고를 보여 주기 전에 동의를 받습니다. iOS 에서는 앱 추적 투명성(ATT)에 따라 추적 허용 여부를 묻고, 허용하지 않으면 광고 식별자 없이 맞춤형이 아닌 광고를 보여 줍니다. 동의나 추적을 거절해도 같은 보상을 받을 수 있습니다.</p>
+    <p><strong>광고 효과 측정(Google Firebase Analytics, 앱 1.1.2 부터):</strong> 광고를 보고 게임을 설치·실행했는지 재기 위해 Google Firebase Analytics 를 씁니다. 앱 설치·첫 실행·실행 횟수·인앱 구매·광고 노출 같은 앱 이용 이벤트와 Firebase 앱 인스턴스 ID, 기기 모델·운영체제·앱 버전, IP 주소로 추정한 대략의 나라·지역을 Google 에 보냅니다. 광고 식별자(Android 의 광고 ID, iOS 의 IDFA)는 iOS 에서는 앱 추적 허용에 동의한 경우에만, 유럽 등 동의가 필요한 지역에서는 동의 화면의 선택에 따라서만 함께 쓰입니다. 이름·이메일·게임 계정 정보는 보내지 않습니다. 처리는 <a href="https://policies.google.com/privacy?hl=ko" target="_blank" rel="noopener">Google 개인정보처리방침</a>과 <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보 안내</a>를 따릅니다.</p>
 
     <p><strong>경기장 광고 칸:</strong> 경기 화면 경기장 옆에 운영자가 정한 그림(광고 또는 Soccerwarz 로고)이 표시됩니다. 이 칸은 광고사를 거치지 않으며 광고 식별자를 쓰지 않습니다. 광고 효과를 집계하기 위해 칸마다 시간대별 표시 횟수와 표시 시간, 그리고 몇 명이 보았는지 세기 위한 계정 식별자와 나라(위 "국가" 항목)를 기록합니다. 광고주에게는 나라별·시간대별 합계만 제공하며 개인을 알아볼 수 있는 정보는 제공하지 않습니다.</p>
 
