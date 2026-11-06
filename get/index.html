@@ -40,6 +40,7 @@
   <script>
   /* 한 링크 페이지(2026-11-03 사용자 · x 세션 요청) — soccer-warz.com/get?src=<출처>
      · 11/18 10:30(한국 시각) 전: "출시 예정" + 공식 사이트·Discord·네이버 라운지(한국어) 링크
+       — 단 아이폰·아이패드는 App Store 사전예약으로 바로 이동, PC 는 사전예약 버튼 추가(2026-11-07 iOS 사전예약 공개 · x 세션 요청)
      · 11/18 뒤: 아이폰·아이패드 → App Store(ct=<src>), 안드로이드 → Google Play(referrer utm_source=<src>) 로 바로 이동, PC 는 두 버튼
      · 언어 = 브라우저 언어(ko·ja·그 밖 en). 시험: ?live=1 이면 출시 뒤 화면, ?live=0 이면 출시 전 화면(이동 안 함) */
   (function () {
@@ -54,9 +55,9 @@
     var lang = nl.indexOf("ko") === 0 ? "ko" : nl.indexOf("ja") === 0 ? "ja" : "en";
     document.documentElement.lang = lang;
     var T = {
-      ko: { lead: "7대7 축구 전략 게임 — 상대 전략을 예측하고 선수를 배치해 승부하세요", soon: "2026년 11월 18일 출시 예정", now: "지금 출시!", site: "공식 사이트", discord: "Discord", lounge: "네이버 게임 라운지", ios: "App Store 에서 받기", play: "Google Play 에서 받기", going: "스토어로 이동하는 중…", noteSoon: "출시일에 이 링크에서 바로 받을 수 있어요." },
-      ja: { lead: "7対7のサッカー戦略ゲーム — 相手の戦略を読んで選手を配置し、勝負しよう", soon: "2026年11月18日 配信予定", now: "配信開始！", site: "公式サイト", discord: "Discord", lounge: "", ios: "App Store でダウンロード", play: "Google Play で手に入れよう", going: "ストアに移動しています…", noteSoon: "配信日にこのリンクからすぐダウンロードできます。" },
-      en: { lead: "7v7 soccer strategy — predict your rival and place your players to win", soon: "Launching November 18, 2026", now: "Out now!", site: "Official website", discord: "Discord", lounge: "", ios: "Download on the App Store", play: "Get it on Google Play", going: "Taking you to the store…", noteSoon: "On launch day, this link takes you straight to the store." }
+      ko: { lead: "7대7 축구 전략 게임 — 상대 전략을 예측하고 선수를 배치해 승부하세요", soon: "2026년 11월 18일 출시 예정", now: "지금 출시!", site: "공식 사이트", discord: "Discord", lounge: "네이버 게임 라운지", ios: "App Store 에서 받기", play: "Google Play 에서 받기", going: "스토어로 이동하는 중…", pre: "App Store 사전예약", noteSoon: "출시일에 이 링크에서 바로 받을 수 있어요." },
+      ja: { lead: "7対7のサッカー戦略ゲーム — 相手の戦略を読んで選手を配置し、勝負しよう", soon: "2026年11月18日 配信予定", now: "配信開始！", site: "公式サイト", discord: "Discord", lounge: "", ios: "App Store でダウンロード", play: "Google Play で手に入れよう", going: "ストアに移動しています…", pre: "App Storeで事前予約", noteSoon: "配信日にこのリンクからすぐダウンロードできます。" },
+      en: { lead: "7v7 soccer strategy — predict your rival and place your players to win", soon: "Launching November 18, 2026", now: "Out now!", site: "Official website", discord: "Discord", lounge: "", ios: "Download on the App Store", play: "Get it on Google Play", going: "Taking you to the store…", pre: "Pre-order on the App Store", noteSoon: "On launch day, this link takes you straight to the store." }
     }[lang];
     var ua = navigator.userAgent || "";
     var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -71,6 +72,8 @@
     try { if (navigator.sendBeacon) navigator.sendBeacon("https://api.soccer-warz.com/pv?p=" + encodeURIComponent("/" + lang + "/get/" + (live ? "live" : "soon")) + "&src=" + encodeURIComponent(src)); } catch (e) {}
     if (!live) {
       $("date").textContent = T.soon;
+      if (isIOS) { btn(IOS_URL, T.pre, true); $("note").textContent = T.going; location.replace(IOS_URL); return; }
+      if (!isAndroid) btn(IOS_URL, T.pre, true);
       btn("/" + lang + "/", T.site, true);
       btn(DISCORD, T.discord);
       if (lang === "ko") btn(LOUNGE, T.lounge);
