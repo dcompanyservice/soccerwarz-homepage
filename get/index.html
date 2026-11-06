@@ -44,7 +44,7 @@
      · 11/18 뒤: 아이폰·아이패드 → App Store(ct=<src>), 안드로이드 → Google Play(referrer utm_source=<src>) 로 바로 이동, PC 는 두 버튼
      · 언어 = 브라우저 언어(ko·ja·그 밖 en). 시험: ?live=1 이면 출시 뒤 화면, ?live=0 이면 출시 전 화면(이동 안 함) */
   (function () {
-    var LAUNCH_MS = Date.UTC(2026, 10, 18, 1, 30, 0);   // 2026-11-18 10:30 KST(10:00 애플 출시·Play 게시 → 10:30 스토어 열림 확인 뒤 — x 세션 11/3). 늦추려면 이 줄만 바꿔 푸시
+    var LAUNCH_MS = Date.UTC(2026, 10, 17, 11, 0, 0);   // 2026-11-17 20:00 KST — Play 공개를 앞당김(2026-11-07 x 세션: iOS 사전예약은 나라별 현지 0시라 뉴질랜드가 11/17 20:00 KST 에 제일 먼저 열림 → 안드로이드가 어디서도 늦지 않게). 옛 11-18 10:30. 바꾸려면 이 줄만 고쳐 푸시
     var IOS_ID = "6826829546", PKG = "com.dcompany.soccerwarz";
     var DISCORD = "https://discord.gg/YrR8NMAfMd", LOUNGE = "https://game.naver.com/lounge/Soccerwarz/home";
     var q = new URLSearchParams(location.search);
