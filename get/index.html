@@ -52,7 +52,9 @@
     var forced = q.get("live");
     var live = forced === "1" ? true : forced === "0" ? false : Date.now() >= LAUNCH_MS;
     var ql = (q.get("lang") || "").toLowerCase();   // 화면 언어 미리보기(?lang=ko|ja|en — 2026-11-07 x 세션 요청, 있으면 기기 언어보다 우선)
-    var nl = (["ko", "ja", "en"].indexOf(ql) >= 0 ? ql : (navigator.language || "en")).toLowerCase();
+    // ?lang 이 없으면 src 로 기본 언어(2026-11-07 x 세션 — X @soccerwarzx 는 일본 전용 계정): x_… 또는 …_ja → ja · …_ko → ko · …_en → en, 그 밖엔 기기 언어
+    var sl = /^x_|_ja$/.test(src) ? "ja" : /_ko$/.test(src) ? "ko" : /_en$/.test(src) ? "en" : "";
+    var nl = (["ko", "ja", "en"].indexOf(ql) >= 0 ? ql : sl || (navigator.language || "en")).toLowerCase();
     var lang = nl.indexOf("ko") === 0 ? "ko" : nl.indexOf("ja") === 0 ? "ja" : "en";
     document.documentElement.lang = lang;
     var T = {
