@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["9RG6ZHVU8U.com.dcompany.soccerwarz"],
+        "components": [{ "/": "/app", "comment": "open game" }, { "/": "/app/*", "comment": "in-game screen" }]
+      }
+    ]
+  }
+}

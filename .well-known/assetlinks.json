@@ -1,0 +1,11 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dcompany.soccerwarz",
+    "sha256_cert_fingerprints": [
+      "3F:15:0C:61:62:97:5C:6D:BF:5A:B9:FE:90:EA:81:0E:BB:9E:B9:BA:A6:18:AE:E0:5A:6C:9B:FB:21:00:0E:A5",
+      "C9:63:43:13:6A:2F:0D:22:31:C3:B5:C8:43:8B:B4:61:59:50:F3:CA:6F:B0:50:5B:5B:C0:7C:0B:FF:F0:E9:11"
+    ]
+  }
+}]
