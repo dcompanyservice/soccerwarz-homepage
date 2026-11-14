@@ -49,6 +49,10 @@
     var DISCORD = "https://discord.gg/YrR8NMAfMd", LOUNGE = "https://game.naver.com/lounge/Soccerwarz/home";
     var q = new URLSearchParams(location.search);
     var src = (q.get("src") || "").toLowerCase().replace(/[^a-z0-9_\-]/g, "").slice(0, 40) || "direct";
+    // 친구 초대(?src=invite&code=<8자리>, 앱 1.1.8~ — 2026-11-15): 안드로이드는 Play 추천인에 invite=<코드> 를 붙여 앱이 자동 입력, 아이폰·PC 는 코드를 보여 주고 손으로 입력
+    var code = (q.get("code") || "").replace(/[^0-9]/g, "").slice(0, 8);
+    if (code.length !== 8) code = "";
+    var REF = "utm_source=" + src + "&utm_medium=get" + (code ? "&invite=" + code : "");
     var forced = q.get("live");
     var live = forced === "1" ? true : forced === "0" ? false : Date.now() >= LAUNCH_MS;
     var ql = (q.get("lang") || "").toLowerCase();   // 화면 언어 미리보기(?lang=ko|ja|en — 2026-11-07 x 세션 요청, 있으면 기기 언어보다 우선)
@@ -58,15 +62,15 @@
     var lang = nl.indexOf("ko") === 0 ? "ko" : nl.indexOf("ja") === 0 ? "ja" : "en";
     document.documentElement.lang = lang;
     var T = {
-      ko: { lead: "7대7 축구 전략 게임 — 상대 전략을 예측하고 선수를 배치해 승부하세요", soon: "2026년 11월 18일 출시 예정", now: "지금 출시!", site: "공식 사이트", discord: "Discord", lounge: "네이버 게임 라운지", ios: "App Store 에서 받기", play: "Google Play 에서 받기", going: "스토어로 이동하는 중…", pre: "App Store 사전예약", noteSoon: "출시일에 이 링크에서 바로 받을 수 있어요." },
-      ja: { lead: "7対7のサッカー戦略ゲーム — 相手の戦略を読んで選手を配置し、勝負しよう", soon: "2026年11月18日 配信予定", now: "配信開始！", site: "公式サイト", discord: "Discord", lounge: "", ios: "App Store でダウンロード", play: "Google Play で手に入れよう", going: "ストアに移動しています…", pre: "App Storeで事前予約", noteSoon: "配信日にこのリンクからすぐダウンロードできます。" },
-      en: { lead: "7v7 soccer strategy — predict your rival and place your players to win", soon: "Launching November 18, 2026", now: "Out now!", site: "Official website", discord: "Discord", lounge: "", ios: "Download on the App Store", play: "Get it on Google Play", going: "Taking you to the store…", pre: "Pre-order on the App Store", noteSoon: "On launch day, this link takes you straight to the store." }
+      ko: { code: "초대 코드 {c} — 게임을 받은 뒤 [친구] → [초대]에 넣으면 둘 다 다이아 100개", lead: "7대7 축구 전략 게임 — 상대 전략을 예측하고 선수를 배치해 승부하세요", soon: "2026년 11월 18일 출시 예정", now: "지금 출시!", site: "공식 사이트", discord: "Discord", lounge: "네이버 게임 라운지", ios: "App Store 에서 받기", play: "Google Play 에서 받기", going: "스토어로 이동하는 중…", pre: "App Store 사전예약", noteSoon: "출시일에 이 링크에서 바로 받을 수 있어요." },
+      ja: { code: "招待コード {c} — ゲームを入れたら［フレンド］→［招待］に入力すると2人ともダイヤ100個", lead: "7対7のサッカー戦略ゲーム — 相手の戦略を読んで選手を配置し、勝負しよう", soon: "2026年11月18日 配信予定", now: "配信開始！", site: "公式サイト", discord: "Discord", lounge: "", ios: "App Store でダウンロード", play: "Google Play で手に入れよう", going: "ストアに移動しています…", pre: "App Storeで事前予約", noteSoon: "配信日にこのリンクからすぐダウンロードできます。" },
+      en: { code: "Invite code {c} — after installing, enter it in [Friends] → [Invite] and you both get 100 diamonds", lead: "7v7 soccer strategy — predict your rival and place your players to win", soon: "Launching November 18, 2026", now: "Out now!", site: "Official website", discord: "Discord", lounge: "", ios: "Download on the App Store", play: "Get it on Google Play", going: "Taking you to the store…", pre: "Pre-order on the App Store", noteSoon: "On launch day, this link takes you straight to the store." }
     }[lang];
     var ua = navigator.userAgent || "";
     var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
     var isAndroid = /Android/i.test(ua);
     var IOS_URL = "https://apps.apple.com/app/id" + IOS_ID + "?ct=" + encodeURIComponent(src) + "&mt=8";
-    var PLAY_URL = "https://play.google.com/store/apps/details?id=" + PKG + "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=get");
+    var PLAY_URL = "https://play.google.com/store/apps/details?id=" + PKG + "&referrer=" + encodeURIComponent(REF);
     var $ = function (id) { return document.getElementById(id); };
     $("lead").textContent = T.lead;
     var btn = function (href, text, primary) {
@@ -84,9 +88,17 @@
       return;
     }
     $("date").textContent = T.now;
+    if (code && !isAndroid) {   // 아이폰·PC: 코드를 크게 보여 주고 바로 이동하지 않음(코드를 봐야 하므로) — 스토어 버튼을 누르면 코드 복사 시도
+      $("note").textContent = T.code.replace("{c}", code);
+      $("note").style.cssText = "font-size:20px;opacity:1;color:#ffd84a;font-weight:700";
+      var cp = function () { try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {} };
+      if (isIOS) { btn(IOS_URL, T.ios, true); } else { btn(IOS_URL, T.ios, true); btn(PLAY_URL, T.play, true); }
+      Array.prototype.forEach.call($("btns").querySelectorAll("a"), function (a) { a.addEventListener("click", cp); });
+      return;
+    }
     if (isIOS) { btn(IOS_URL, T.ios, true); $("note").textContent = T.going; location.replace(IOS_URL); return; }
     // 안드로이드: Play 스토어 앱을 바로 엶(intent — 크롬 안 웹 페이지로 열리던 것, A24 2026-11-03), 스토어 앱이 없으면 웹 주소로
-    var PLAY_INTENT = "intent://details?id=" + PKG + "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=get") +
+    var PLAY_INTENT = "intent://details?id=" + PKG + "&referrer=" + encodeURIComponent(REF) +
       "#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=" + encodeURIComponent(PLAY_URL) + ";end";
     if (isAndroid) { btn(PLAY_INTENT, T.play, true); $("note").textContent = T.going; location.replace(PLAY_INTENT); return; }
     btn(IOS_URL, T.ios, true);
