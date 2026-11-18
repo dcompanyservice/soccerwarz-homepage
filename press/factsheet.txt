@@ -3,8 +3,8 @@ SOCCERWARZ - PRESS KIT FACT SHEET
 Title:        Soccerwarz
 Developer:    dcompany (game studio, Republic of Korea)
 Release date: November 18, 2026
-App Store (pre-order): https://apps.apple.com/app/id6826829546
-Google Play: live from November 17, 2026, 20:00 KST (11:00 UTC) — link added then
+App Store:    https://apps.apple.com/app/id6826829546
+Google Play:  https://play.google.com/store/apps/details?id=com.dcompany.soccerwarz
 Platforms:    Android (Google Play), iOS (App Store)
 Price:        Free to play (optional in-app purchases)
 Genre:        7v7 soccer strategy
@@ -35,4 +35,4 @@ ASSETS IN THIS KIT
 screenshots/  portrait 1080x1920 (6), landscape 1920x1080 (4)
 logo/         logo (transparent PNG), app icon 1024/512, key art 1024x500
 
-Store links will be added on release day.
+Out now on Google Play and the App Store.
