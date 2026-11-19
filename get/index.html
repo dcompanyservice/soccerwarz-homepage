@@ -82,7 +82,7 @@
     var ua = navigator.userAgent || "";
     var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
     var isAndroid = /Android/i.test(ua);
-    var IOS_URL = "https://apps.apple.com/app/id" + IOS_ID + "?ct=" + encodeURIComponent(src) + "&mt=8";
+    var IOS_URL = "https://apps.apple.com/app/apple-store/id" + IOS_ID + "?pt=129478168&ct=" + encodeURIComponent(src) + "&mt=8";   // pt = App Store Connect 제공자 토큰(캠페인 집계, 2026-11-19 x 세션)
     var PLAY_URL = "https://play.google.com/store/apps/details?id=" + PKG + "&referrer=" + encodeURIComponent(REF);
     var $ = function (id) { return document.getElementById(id); };
     $("lead").textContent = T.lead;
