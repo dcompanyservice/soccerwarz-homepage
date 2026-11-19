@@ -52,7 +52,10 @@
     // 친구 초대(?src=invite&code=<8자리>, 앱 1.1.8~ — 2026-11-15): 안드로이드는 Play 추천인에 invite=<코드> 를 붙여 앱이 자동 입력, 아이폰·PC 는 코드를 보여 주고 손으로 입력
     var code = (q.get("code") || "").replace(/[^0-9]/g, "").slice(0, 8);
     if (code.length !== 8) code = "";
-    var REF = "utm_source=" + src + "&utm_medium=get" + (code ? "&invite=" + code : "");
+    // Play 설치 추천인(2026-11-19 x 세션 — 앱 1.2.1 부터 서버 players.utm_* 에 저장): source = src 전체, medium = src 의 첫 마디(x_jp → x · yt_kr → yt · invite),
+    // campaign = ?c= (없으면 launch)
+    var camp = (q.get("c") || q.get("utm_campaign") || "").toLowerCase().replace(/[^a-z0-9_\-]/g, "").slice(0, 40) || "launch";
+    var REF = "utm_source=" + src + "&utm_medium=" + src.split("_")[0] + "&utm_campaign=" + camp + (code ? "&invite=" + code : "");
     var forced = q.get("live");
     var live = forced === "1" ? true : forced === "0" ? false : Date.now() >= LAUNCH_MS;
     var ql = (q.get("lang") || "").toLowerCase();   // 화면 언어 미리보기(?lang=ko|ja|en — 2026-11-07 x 세션 요청, 있으면 기기 언어보다 우선)
