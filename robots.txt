@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://soccer-warz.com/sitemap.xml
+
+#DaumWebMasterTool:91cabd8c61aa5cc2a0a8d3fe22026e72db6bd77d0c77aba502915627ef7488de:HIcNwRrP5YqFZ/r1eI1o/A==
