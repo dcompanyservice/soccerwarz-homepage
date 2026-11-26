@@ -182,4 +182,28 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/rates/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/rates/"/>
   </url>
+  <url>
+    <loc>https://soccer-warz.com/en/coupon/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soccer-warz.com/en/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soccer-warz.com/ko/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/coupon/"/>
+  </url>
+  <url>
+    <loc>https://soccer-warz.com/ko/coupon/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soccer-warz.com/en/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soccer-warz.com/ko/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/coupon/"/>
+  </url>
+  <url>
+    <loc>https://soccer-warz.com/ja/coupon/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soccer-warz.com/en/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soccer-warz.com/ko/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soccer-warz.com/ja/coupon/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soccer-warz.com/en/coupon/"/>
+  </url>
 </urlset>
